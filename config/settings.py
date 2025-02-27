@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'users',
     'clients',
     'mailing_messages',
+    'mailings',
 
 
 

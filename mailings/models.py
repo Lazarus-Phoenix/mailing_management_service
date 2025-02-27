@@ -1,6 +1,6 @@
 from django.db import models
 from clients.models import Client
-from messages.models import Message
+from mailing_messages.models import Message
 from users.models import CustomUser
 
 class Mailing(models.Model):

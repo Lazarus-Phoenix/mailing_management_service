@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -132,7 +134,9 @@ FORBIDDEN_WORDS = [
 """
 кастомная модель пользователя
 """
+"""Закоментируй её когда создаёшь проект, иначе  python manage.py startapp users не сработает"""
 AUTH_USER_MODEL = 'users.CustomUser'
+
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
@@ -149,11 +153,11 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL =  EMAIL_HOST_USER # - это адрес электронной почты, который Django будет использовать для отправки системных сообщений и уведомлений об ошибках
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://localhost:6379/1',
-    }
-}
-
-CACHE_ENABLED = True
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+#         'LOCATION': 'redis://localhost:6379/1',
+#     }
+# }
+#
+# CACHE_ENABLED = True

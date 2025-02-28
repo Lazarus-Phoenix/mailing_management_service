@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Клиенты</h2>
+        <a href="{% url 'client_create' %}" class="btn btn-primary">Добавить клиента</a>
+            <table class="table">
+              {% for client in object_list %}
+                  <tr>
+                    <td>{{ client.full_name }}</td>
+                    <td>{{ client.email }}</td>
+                    <td>
+                      <a href="{% url 'client_update' client.pk %}">✏️</a>
+                      <a href="{% url 'client_delete' client.pk %}">❌</a>
+                    </td>
+                  </tr>
+              {% endfor %}
+            </table>
+{% endblock %}

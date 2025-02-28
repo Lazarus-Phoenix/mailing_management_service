@@ -7,6 +7,21 @@ from config.settings import EMAIL_HOST_USER
 from .models import CustomUser
 from .forms import ProfileForm, CustomUserCreationForm
 
+from django.contrib.auth.views import LoginView, LogoutView
+from django.views.generic import CreateView
+from .forms import UserRegistrationForm
+
+class UserLoginView(LoginView):
+    template_name = 'users/login.html'
+
+class UserLogoutView(LogoutView):
+    next_page = '/'
+
+class UserRegisterView(CreateView):
+    form_class = UserRegistrationForm
+    template_name = 'users/register.html'
+    success_url = '/login/'
+
 
 class UserViewSet:
     def list(self, request):

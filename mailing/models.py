@@ -1,21 +1,22 @@
 from django.db import models
-from users.models import User
+from users.models import CustomUser
 
 
 class Client(models.Model):
     email = models.EmailField(unique=True)
     full_name = models.CharField(max_length=255)
     comment = models.TextField(blank=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
 
 class Message(models.Model):
     subject = models.CharField(max_length=255)
     body = models.TextField()
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
 
 class Mailing(models.Model):
+    owner = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, verbose_name='Владелец')
     STATUS_CHOICES = [
         ('created', 'Создана'),
         ('started', 'Запущена'),
@@ -27,10 +28,14 @@ class Mailing(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='created')
     message = models.ForeignKey(Message, on_delete=models.CASCADE)
     clients = models.ManyToManyField(Client)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
 
 class MailingAttempt(models.Model):
+    
+    status = models.CharField(max_length=15, choices=[('success', 'Успешно'), ('failed', 'Не успешно')])
+    mailing = models.ForeignKey(Mailing, on_delete=models.CASCADE, related_name='attempts')
+
     STATUS_CHOICES = [
         ('success', 'Успешно'),
         ('failed', 'Не успешно')

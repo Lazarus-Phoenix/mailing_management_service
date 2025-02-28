@@ -41,3 +41,23 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
 
 class ClientUpdateView(IsOwnerMixin, UpdateView):
     ...
+
+
+class ClientDeleteView:
+    pass
+
+
+class MailingListView:
+    pass
+
+
+class MailingCreateView:
+    pass
+
+
+class MailingUpdateView:
+    pass
+
+
+class MailingDeleteView:
+    pass

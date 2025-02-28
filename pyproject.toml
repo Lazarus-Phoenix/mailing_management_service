@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "mailing-management-service"
+version = "0.1.0"
+description = ""
+authors = ["Dmitry_Bezgubov <dmitrij-bezgubov@yandex.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^5.1.6"
+dotenv = "^0.9.9"
+psycopg2 = "^2.9.10"
+pillow = "^11.1.0"
+phonenumbers = "^8.13.55"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

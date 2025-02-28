@@ -1,8 +1,9 @@
 from django.urls import path
-from . import views
+
+from mailing_messages.views import MessageListView, CreateMessageView, MessageDetailView
 
 urlpatterns = [
-    path('', views.MessageListView.as_view(), name='message_list'),
-    path('create/', views.CreateMessageView.as_view(), name='create_message'),
-    path('<int:pk>/', views.MessageDetailView.as_view(), name='message_detail'),
+    path('', MessageListView.as_view(), name='message_list'),
+    path('create/', CreateMessageView.as_view(), name='create_message'),
+    path('<int:pk>/', MessageDetailView.as_view(), name='message_detail'),
 ]

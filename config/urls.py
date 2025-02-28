@@ -8,7 +8,7 @@ urlpatterns = [
     path('', include('users.urls')),
     path('clients/', include('clients.urls')),
     path('mailings/', include('mailings.urls')),
-    path('messages/', include('mailing_messages.urls')),  # Добавлен для messages
+    path('mailing_messages/', include('mailing_messages.urls')),  # Добавлен для messages
 
     # Пути для API
     path('api/v1/auth/', include('users.api.urls')),

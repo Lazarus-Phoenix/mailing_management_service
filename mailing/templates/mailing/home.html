@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="display-4">Управление рассылками</h1>
+    <p class="lead">Добро пожаловать в систему управления email-рассылками.</p>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Всего рассылок</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ total_mailings }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Активные рассылки</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ active_mailings }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-header">Уникальные клиенты</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ unique_clients }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="{% url 'mailing_list' %}" class="btn btn-outline-primary">Управление рассылками</a>
+        <a href="{% url 'client_list' %}" class="btn btn-outline-secondary">Управление клиентами</a>
+        <a href="{% url 'message_list' %}" class="btn btn-outline-success">Управление сообщениями</a>
+    </div>
+</div>
+{% endblock %}

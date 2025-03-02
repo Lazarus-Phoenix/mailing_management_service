@@ -1,8 +1,7 @@
-
 <!doctype html>
 {% load static %}
 <html lang="en" data-bs-theme="auto">
-  <head><script src="{% static 'js/color-modes.js' %}"></script>
+  <script src="static/js/bootstrap.bundle.min.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,11 +12,11 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
 
-    
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-<link href="{%static 'css/bootstrap.min.css'%}" rel="stylesheet" >
+<link href="static/css/bootstrap.min.css" rel="stylesheet">
 
 <!--    &lt;!&ndash; Favicons &ndash;&gt;-->
 <!--<link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">-->
@@ -107,7 +106,7 @@
       }
     </style>
 
-    
+
   </head>
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -161,7 +160,7 @@
       </ul>
     </div>
 
-    
+
 <header data-bs-theme="dark">
   {%include 'includes/inc_menu.html'%}
 </header>
@@ -174,10 +173,7 @@
         <h1 class="fw-light"> тут название проекта</h1>
         <p class="lead text-body-secondary">тут украшение, графическая вставка✮⋆₊ ⊹₊ ⊹✮⋆˙☕️🍂🎧🎸🎤˙⋆✮⊹ ⋆₊ ₊✮</p>
         <p>
-          <a href="/" class="btn btn-primary my-2">Главная</a>
-          <a href="/category_list/" class="btn btn-primary my-2">Категории</a>
-          <a href="/contacts/" class="btn btn-secondary my-2">Контакты</a>
-          <a href="/blogs/"class="btn btn-success my-2">Блог</a>
+
         </p>
         {% if user.is_authenticated %}
 тут можно вставить функционал сопровождающий базовый шаблон, но доступный только зарегистрированным пользователям
@@ -197,7 +193,7 @@
     <p class="mb-0">Интерфейс на базе Bootstrap <a href="/">Visit the homepage</a> or read our <a href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
   </div>
 </footer>
-<script src="{%static 'js/bootstrap.bundle.min.js'%}" ></script>
+<script src="static/js/bootstrap.bundle.min.js"></script>
 
     </body>
 </html>

@@ -31,11 +31,12 @@
             </div>
         </div>
     </div>
-
-    <div class="mt-4">
-        <a href="{% url 'mailing_list' %}" class="btn btn-outline-primary">Управление рассылками</a>
-        <a href="{% url 'client_list' %}" class="btn btn-outline-secondary">Управление клиентами</a>
-        <a href="{% url 'message_list' %}" class="btn btn-outline-success">Управление сообщениями</a>
+        {% if user.is_authenticated %}
+            <div class="mt-4">
+                <a href="{% url 'mailing_list' %}" class="btn btn-outline-primary">Управление рассылками</a>
+                <a href="{% url 'client_list' %}" class="btn btn-outline-secondary">Управление клиентами</a>
+                <a href="{% url 'message_list' %}" class="btn btn-outline-success">Управление сообщениями</a>
+            </div>
+        {% endif %}
     </div>
-</div>
 {% endblock %}

@@ -1,7 +1,7 @@
 <!doctype html>
 {% load static %}
 <html lang="en" data-bs-theme="auto">
-  <script src="static/js/bootstrap.bundle.min.js"></script>
+  <head><script src="{% static 'js/color-modes.js' %}"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -170,14 +170,13 @@
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light"> тут название проекта</h1>
-        <p class="lead text-body-secondary">тут украшение, графическая вставка✮⋆₊ ⊹₊ ⊹✮⋆˙☕️🍂🎧🎸🎤˙⋆✮⊹ ⋆₊ ₊✮</p>
+        <h1 class="fw-light"> Липкие рассылки "Сам ты спам"</h1>
+        <p class="lead text-body-secondary">🫰🤑Мы сделаем ваш бизнес максимально навязчивым🤑🫰</p>
+
         <p>
 
         </p>
-        {% if user.is_authenticated %}
-тут можно вставить функционал сопровождающий базовый шаблон, но доступный только зарегистрированным пользователям
-        {% endif %}
+
       </div>
     </div>
   </section>
@@ -193,7 +192,7 @@
     <p class="mb-0">Интерфейс на базе Bootstrap <a href="/">Visit the homepage</a> or read our <a href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
   </div>
 </footer>
-<script src="static/js/bootstrap.bundle.min.js"></script>
+<head><script src="{% static 'js/color-modes.js' %}"></script>
 
     </body>
 </html>

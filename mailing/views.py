@@ -93,6 +93,7 @@ class MessageDeleteView(IsOwnerMixin, DeleteView):
 
 
 class HomeView(TemplateView):
+    """Объекты считывающие с базы кол-во рассылок и клиентов с сортингом по признакам"""
     template_name = 'mailing/home.html'
 
     def get_context_data(self, **kwargs):

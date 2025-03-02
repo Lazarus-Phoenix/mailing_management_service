@@ -6,20 +6,21 @@ from django.urls import reverse_lazy
 
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
 from django.urls import reverse_lazy
+
+from .forms import ClientForm, MessageForm, MailingForm
 from .models import Client, Mailing, Message
 from .permissions import IsOwnerMixin
+from .permissions import IsOwnerFilterMixin
 
 # Clients Views
-class ClientListView(IsOwnerMixin, ListView):
+class ClientListView(IsOwnerFilterMixin, ListView):
     model = Client
     template_name = 'mailing/client_list.html'
+    context_object_name = 'clients'
 
-    def get_queryset(self):
-        return Client.objects.filter(owner=self.request.user)
-
-class ClientCreateView(IsOwnerMixin, CreateView):
+class ClientCreateView(CreateView):
     model = Client
-    fields = ['email', 'full_name', 'comment']
+    form_class = ClientForm
     template_name = 'mailing/client_form.html'
     success_url = reverse_lazy('client_list')
 
@@ -27,9 +28,9 @@ class ClientCreateView(IsOwnerMixin, CreateView):
         form.instance.owner = self.request.user
         return super().form_valid(form)
 
-class ClientUpdateView(IsOwnerMixin, UpdateView):
+class ClientUpdateView(IsOwnerFilterMixin, UpdateView):
     model = Client
-    fields = ['email', 'full_name', 'comment']
+    form_class = ClientForm
     template_name = 'mailing/client_form.html'
     success_url = reverse_lazy('client_list')
 
@@ -39,16 +40,16 @@ class ClientDeleteView(IsOwnerMixin, DeleteView):
     template_name = 'mailing/client_confirm_delete.html'
 
 # Mailings Views
-class MailingListView(IsOwnerMixin, ListView):
+class MailingListView(IsOwnerFilterMixin, ListView):
     model = Mailing
     template_name = 'mailing/mailing_list.html'
+    context_object_name = 'mailings'
+    # def get_queryset(self):
+    #     return Mailing.objects.filter(owner=self.request.user)
 
-    def get_queryset(self):
-        return Mailing.objects.filter(owner=self.request.user)
-
-class MailingCreateView(IsOwnerMixin, CreateView):
+class MailingCreateView(CreateView):
     model = Mailing
-    fields = ['start_time', 'end_time', 'status', 'message', 'clients']
+    form_class = MailingForm
     template_name = 'mailing/mailing_form.html'
     success_url = reverse_lazy('mailing_list')
 
@@ -58,7 +59,7 @@ class MailingCreateView(IsOwnerMixin, CreateView):
 
 class MailingUpdateView(IsOwnerMixin, UpdateView):
     model = Mailing
-    fields = ['start_time', 'end_time', 'status', 'message', 'clients']
+    form_class = MailingForm
     template_name = 'mailing/mailing_form.html'
     success_url = reverse_lazy('mailing_list')
 
@@ -68,19 +69,23 @@ class MailingDeleteView(IsOwnerMixin, DeleteView):
     template_name = 'mailing/mailing_confirm_delete.html'
 
 # Messages Views
-class MessageListView(IsOwnerMixin, ListView):
+class MessageListView(IsOwnerFilterMixin, ListView):
     model = Message
     template_name = 'mailing/message_list.html'
 
-class MessageCreateView(IsOwnerMixin, CreateView):
+class MessageCreateView(CreateView):
     model = Message
-    fields = ['subject', 'body']
+    form_class = MessageForm
     template_name = 'mailing/message_form.html'
     success_url = reverse_lazy('message_list')
 
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
 class MessageUpdateView(IsOwnerMixin, UpdateView):
     model = Message
-    fields = ['subject', 'body']
+    form_class = MessageForm
     template_name = 'mailing/message_form.html'
     success_url = reverse_lazy('message_list')
 

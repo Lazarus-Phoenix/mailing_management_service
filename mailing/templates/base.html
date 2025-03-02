@@ -1,5 +1,6 @@
 <!doctype html>
 {% load static %}
+
 <html lang="en" data-bs-theme="auto">
   <head><script src="{% static 'js/color-modes.js' %}"></script>
 
@@ -16,7 +17,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-<link href="static/css/bootstrap.min.css" rel="stylesheet">
+<link href="{%static 'css/bootstrap.min.css'%}" rel="stylesheet" >
 
 <!--    &lt;!&ndash; Favicons &ndash;&gt;-->
 <!--<link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">-->
@@ -183,15 +184,16 @@
   {% block content %}{% endblock %}
 </main>
 
-<footer class="text-body-secondary py-5">
-  <div class="container">
-    <p class="float-end mb-1">
-      <a href="#">Back to top</a>
-    </p>
-    <p class="mb-1">Все права правы, копирование скопировано, использование использовано по назначению!</p>
-    <p class="mb-0">Интерфейс на базе Bootstrap <a href="/">Visit the homepage</a> or read our <a href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
-  </div>
-</footer>
+  <footer class="text-body-secondary py-5">
+    <div class="container">
+      <p class="float-end mb-1">
+        <a href="#">Back to top</a>
+      </p>
+      <p class="mb-1">Все права правы, копирование скопировано, использование использовано по назначению!</p>
+      <p class="mb-0">Интерфейс на базе Bootstrap <a href="/">Visit the homepage</a> or read our <a href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
+    </div>
+  </footer>
+
 <head><script src="{% static 'js/color-modes.js' %}"></script>
 
     </body>

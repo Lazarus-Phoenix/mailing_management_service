@@ -23,4 +23,4 @@ class UserLogoutView(LogoutView):
     Представление для выхода пользователя.
     """
     template_name = 'users/logout.html'
-    next_page = reverse_lazy('home')
+    next_page = reverse_lazy('logout')

@@ -8,12 +8,16 @@ class Client(models.Model):
     comment = models.TextField(blank=True)
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f"{self.full_name} ({self.email})"  # Отображает строково имя и email
 
 class Message(models.Model):
     subject = models.CharField(max_length=255)
     body = models.TextField()
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.subject  # Отображает строково тему сообщения
 
 class Mailing(models.Model):
     owner = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, verbose_name='Владелец')
@@ -32,7 +36,7 @@ class Mailing(models.Model):
 
 
 class MailingAttempt(models.Model):
-    
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
     status = models.CharField(max_length=15, choices=[('success', 'Успешно'), ('failed', 'Не успешно')])
     mailing = models.ForeignKey(Mailing, on_delete=models.CASCADE, related_name='attempts')
 

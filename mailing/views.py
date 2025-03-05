@@ -1,16 +1,33 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-
-
-from django.urls import reverse_lazy
-
-
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
 from django.urls import reverse_lazy
-
 from .forms import ClientForm, MessageForm, MailingForm
-from .models import Client, Mailing, Message
 from .permissions import IsOwnerMixin
 from .permissions import IsOwnerFilterMixin
+from django.views.generic import TemplateView
+from .models import Mailing, MailingAttempt, Message, Client
+
+
+# mailing/views.py
+class MailingReportView(TemplateView):
+    template_name = 'mailing/report.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_mailings = Mailing.objects.filter(owner=self.request.user)
+        reports = []
+        for mailing in user_mailings:
+            attempts = MailingAttempt.objects.filter(mailing=mailing)
+            success = attempts.filter(status='success').count()
+            failed = attempts.filter(status='failed').count()
+            reports.append({
+                'mailing': mailing,
+                'success': success,
+                'failed': failed,
+                'total': success + failed,
+            })
+        context['reports'] = reports
+        return context
+
 
 # Clients Views
 class ClientListView(IsOwnerFilterMixin, ListView):

@@ -3,7 +3,7 @@ from .views import (
     ClientListView, ClientCreateView, ClientUpdateView, ClientDeleteView,
     MailingListView, MailingCreateView, MailingUpdateView, MailingDeleteView,
     MessageListView, MessageCreateView, MessageUpdateView, MessageDeleteView,
-    HomeView
+    HomeView, MailingReportView
 )
 
 urlpatterns = [
@@ -19,6 +19,7 @@ urlpatterns = [
     path('mailings/create/', MailingCreateView.as_view(), name='mailing_create'),
     path('mailings/<int:pk>/edit/', MailingUpdateView.as_view(), name='mailing_update'),
     path('mailings/<int:pk>/delete/', MailingDeleteView.as_view(), name='mailing_delete'),
+    path('report/', MailingReportView.as_view(), name='mailing-report'),
 
     # Messages URLs
     path('messages/', MessageListView.as_view(), name='message_list'),

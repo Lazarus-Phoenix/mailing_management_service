@@ -5,7 +5,7 @@ from .permissions import IsOwnerMixin
 from .permissions import IsOwnerFilterMixin
 from django.views.generic import TemplateView
 from .models import Mailing, MailingAttempt, Message, Client
-
+from django.views.decorators.cache import cache_page
 
 from django.shortcuts import redirect
 from .services import send_mailing
@@ -123,8 +123,15 @@ class MessageDeleteView(IsOwnerMixin, DeleteView):
     template_name = 'mailing/message_confirm_delete.html'
 
 
+class MailingAttemptListView(ListView):
+    model = MailingAttempt
+    template_name = 'mailing/attempt_list.html'
+
+    def get_queryset(self):
+        return MailingAttempt.objects.filter(mailing__owner=self.request.user)
 
 
+@cache_page(60 * 15)
 class HomeView(TemplateView):
     """Объекты считывающие с базы кол-во рассылок и клиентов с сортингом по признакам"""
     template_name = 'mailing/home.html'
@@ -136,4 +143,3 @@ class HomeView(TemplateView):
         context['unique_clients'] = Client.objects.distinct().count()
 
         return context
-

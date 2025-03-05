@@ -162,7 +162,7 @@ EMAIL_HOST_USER = 'dmitrij-bezgubov@yandex.ru'
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-# SERVER_EMAIL =  EMAIL_HOST_USER # - это адрес электронной почты, который Django будет использовать для отправки системных сообщений и уведомлений об ошибках
+SERVER_EMAIL =  EMAIL_HOST_USER # - это адрес электронной почты, который Django будет использовать для отправки системных сообщений и уведомлений об ошибках
 
 CACHES = {
     'default': {

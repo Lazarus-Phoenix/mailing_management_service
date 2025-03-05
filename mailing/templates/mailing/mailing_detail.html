@@ -1,0 +1,6 @@
+{% if object.owner == request.user and object.status == 'created' %}
+<form method="post" action="{% url 'mailing-start' object.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">Запустить рассылку</button>
+</form>
+{% endif %}

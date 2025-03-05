@@ -7,6 +7,17 @@ from django.views.generic import TemplateView
 from .models import Mailing, MailingAttempt, Message, Client
 
 
+from django.shortcuts import redirect
+from .services import send_mailing
+
+def start_mailing(request, pk):
+    mailing = Mailing.objects.get(pk=pk)
+    if mailing.owner == request.user:
+        send_mailing(mailing)
+        mailing.status = 'started'
+        mailing.save()
+    return redirect('mailing-detail', pk=pk)
+
 # mailing/views.py
 class MailingReportView(TemplateView):
     template_name = 'mailing/report.html'

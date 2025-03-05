@@ -34,6 +34,12 @@ class Mailing(models.Model):
     clients = models.ManyToManyField(Client)
     owner = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, verbose_name='Владелец')
 
+    class Meta:
+        permissions = [
+            ("can_view_all", "Может просматривать все рассылки"),
+            ("can_disable", "Может отключать рассылки"),
+        ]
+
     def __str__(self):
         return f"Рассылка {self.id} - {self.status}"
 

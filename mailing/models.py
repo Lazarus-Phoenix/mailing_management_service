@@ -20,7 +20,7 @@ class Message(models.Model):
         return self.subject  # Отображает строково тему сообщения
 
 class Mailing(models.Model):
-    owner = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, verbose_name='Владелец')
+
     STATUS_CHOICES = [
         ('created', 'Создана'),
         ('started', 'Запущена'),
@@ -32,13 +32,13 @@ class Mailing(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='created')
     message = models.ForeignKey(Message, on_delete=models.CASCADE)
     clients = models.ManyToManyField(Client)
-    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    owner = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, verbose_name='Владелец')
 
+    def __str__(self):
+        return f"Рассылка {self.id} - {self.status}"
 
 class MailingAttempt(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    status = models.CharField(max_length=15, choices=[('success', 'Успешно'), ('failed', 'Не успешно')])
-    mailing = models.ForeignKey(Mailing, on_delete=models.CASCADE, related_name='attempts')
+
 
     STATUS_CHOICES = [
         ('success', 'Успешно'),
@@ -46,6 +46,9 @@ class MailingAttempt(models.Model):
     ]
 
     attempt_time = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=7, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=15, choices=STATUS_CHOICES)
     server_response = models.TextField(blank=True)
     mailing = models.ForeignKey(Mailing, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Попытка {self.id} - {self.status}"

@@ -5,7 +5,7 @@ from .permissions import IsOwnerMixin
 from .permissions import IsOwnerFilterMixin
 from django.views.generic import TemplateView
 from .models import Mailing, MailingAttempt, Message, Client
-from django.views.decorators.cache import cache_page
+
 
 from django.shortcuts import redirect
 from .services import send_mailing
@@ -131,10 +131,11 @@ class MailingAttemptListView(ListView):
         return MailingAttempt.objects.filter(mailing__owner=self.request.user)
 
 
-@cache_page(60 * 15)
+
 class HomeView(TemplateView):
     """Объекты считывающие с базы кол-во рассылок и клиентов с сортингом по признакам"""
     template_name = 'mailing/home.html'
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

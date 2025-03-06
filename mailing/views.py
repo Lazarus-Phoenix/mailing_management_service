@@ -1,4 +1,4 @@
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
+from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView, TemplateView
 from django.urls import reverse_lazy
 from .forms import ClientForm, MessageForm, MailingForm
 from .permissions import IsOwnerMixin
@@ -68,6 +68,11 @@ class ClientDeleteView(IsOwnerMixin, DeleteView):
     template_name = 'mailing/client_confirm_delete.html'
 
 # Mailings Views
+class MailingDetailView(DetailView):
+    model = Mailing
+    template_name = 'mailing/mailing_detail.html'
+    context_object_name = 'object'
+
 class MailingListView(IsOwnerFilterMixin, ListView):
     model = Mailing
     template_name = 'mailing/mailing_list.html'

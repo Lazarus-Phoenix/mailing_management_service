@@ -174,4 +174,4 @@ CACHES = {
     }
 }
 
-CACHE_ENABLED = True
+CACHE_ENABLED = False

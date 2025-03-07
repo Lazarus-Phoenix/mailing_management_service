@@ -3,7 +3,7 @@
 ![Screenshot 2025-03-07 at 21-47-45 Spam sender.png](static/images/Screenshot%202025-03-07%20at%2021-47-45%20Spam%20sender.png)
 ![Screenshot 2025-03-07 at 21-47-45 Spam sender.png](static/images/Screenshot%202025-03-07%20at%2021-47-21%20Spam%20sender.png)
 2. Пользователю организован доступ к редактированию своего профиля
-![Screenshot 2025-03-07 at 21-47-45 Spam sender.png](static/images/Screenshot%202025-03-07%20at%2021-47-45%20Spam%20sender.png)
+![Screenshot 2025-03-07 at 21-47-45 Spam sender.png](static/images/Screenshot%202025-03-07%20at%2020-58-16%20Spam%20sender.png)
 3. Установлен flake8 , при помощи которого проверено соответствие PEP-8 
 
 # Веб-приложение для управления рассылками сообщений

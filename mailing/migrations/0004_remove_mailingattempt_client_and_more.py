@@ -6,27 +6,30 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mailing', '0003_alter_message_body_alter_message_subject'),
+        ("mailing", "0003_alter_message_body_alter_message_subject"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='mailingattempt',
-            name='client',
+            model_name="mailingattempt",
+            name="client",
         ),
         migrations.AlterField(
-            model_name='mailingattempt',
-            name='status',
-            field=models.CharField(choices=[('success', 'Успешно'), ('failed', 'Не успешно')], max_length=15),
+            model_name="mailingattempt",
+            name="status",
+            field=models.CharField(
+                choices=[("success", "Успешно"), ("failed", "Не успешно")],
+                max_length=15,
+            ),
         ),
         migrations.AlterField(
-            model_name='message',
-            name='body',
+            model_name="message",
+            name="body",
             field=models.TextField(),
         ),
         migrations.AlterField(
-            model_name='message',
-            name='subject',
+            model_name="message",
+            name="subject",
             field=models.CharField(max_length=255),
         ),
     ]

@@ -1,10 +1,11 @@
 # Внесены правки:
-1. Создан вывод профиля пользователя 
+1.![Screenshot 2025-03-07 at 20-49-54 Spam sender](https://github.com/user-attachments/assets/c98b40bc-2cc1-485c-9752-300061c1fbaa)
+2. Создан вывод профиля пользователя 
 ![Screenshot 2025-03-07 at 21-47-45 Spam sender.png](static/images/Screenshot%202025-03-07%20at%2021-47-45%20Spam%20sender.png)
 ![Screenshot 2025-03-07 at 21-47-45 Spam sender.png](static/images/Screenshot%202025-03-07%20at%2021-47-21%20Spam%20sender.png)
-2. Пользователю организован доступ к редактированию своего профиля
+3. Пользователю организован доступ к редактированию своего профиля
 ![Screenshot 2025-03-07 at 21-47-45 Spam sender.png](static/images/Screenshot%202025-03-07%20at%2020-58-16%20Spam%20sender.png)
-3. Установлен flake8 , при помощи которого проверено соответствие PEP-8 
+4. Установлен flake8 , при помощи которого проверено соответствие PEP-8 
 ---
 # Веб-приложение для управления рассылками сообщений
 

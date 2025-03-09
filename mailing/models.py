@@ -11,6 +11,7 @@ class Client(models.Model):
     def __str__(self):
         return f"{self.full_name} ({self.email})"  # Отображает строково имя и email
 
+
 class Message(models.Model):
     subject = models.CharField(max_length=255)
     body = models.TextField()
@@ -19,20 +20,23 @@ class Message(models.Model):
     def __str__(self):
         return self.subject  # Отображает строково тему сообщения
 
+
 class Mailing(models.Model):
 
     STATUS_CHOICES = [
-        ('created', 'Создана'),
-        ('started', 'Запущена'),
-        ('completed', 'Завершена')
+        ("created", "Создана"),
+        ("started", "Запущена"),
+        ("completed", "Завершена"),
     ]
 
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='created')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="created")
     message = models.ForeignKey(Message, on_delete=models.CASCADE)
     clients = models.ManyToManyField(Client)
-    owner = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, verbose_name='Владелец')
+    owner = models.ForeignKey(
+        "users.CustomUser", on_delete=models.CASCADE, verbose_name="Владелец"
+    )
 
     class Meta:
         permissions = [
@@ -43,13 +47,10 @@ class Mailing(models.Model):
     def __str__(self):
         return f"Рассылка {self.id} - {self.status}"
 
+
 class MailingAttempt(models.Model):
 
-
-    STATUS_CHOICES = [
-        ('success', 'Успешно'),
-        ('failed', 'Не успешно')
-    ]
+    STATUS_CHOICES = [("success", "Успешно"), ("failed", "Не успешно")]
 
     attempt_time = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=15, choices=STATUS_CHOICES)

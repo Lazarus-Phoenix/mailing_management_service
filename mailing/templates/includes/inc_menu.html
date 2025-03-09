@@ -22,26 +22,27 @@
                 <li class ="list-unstyled">
                     {% if user.is_authenticated %}
                         <p>Добро пожаловать {{user.name}} {{user.email}} !</p>
+                        <a href="{% url 'profile' %}" class="btn btn-outline-primary">Профиль</a>
                     {% else %}
                         <p>Добро пожаловать на наш сайт!</p>
                     {% endif %}
                 </li>
 
               {% if user.is_authenticated %}
-              <li class="nav-item">
-                  <form method="post" action="{% url 'logout' %}" style="display: inline;">
-                      {% csrf_token %}
-                      <button type="submit" class="btn btn-link nav-link">Выйти
-                      </button>
-                  </form>
-              </li>
+                  <li class="nav-item">
+                      <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-link nav-link">Выйти
+                          </button>
+                      </form>
+                  </li>
               {% else %}
-              <li class="nav-item">
-                  <a class="nav-link" href="{% url 'login' %}">Войти</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
-              </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'login' %}">Войти</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
+                  </li>
               {% endif %}
             </ul>
         </div>

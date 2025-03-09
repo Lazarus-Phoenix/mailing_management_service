@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Детали рассылки #{{ object.id }}</h2>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            Основная информация
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Статус:</dt>
+                <dd class="col-sm-9">{{ object.get_status_display }}</dd>
+
+                <dt class="col-sm-3">Начало рассылки:</dt>
+                <dd class="col-sm-9">{{ object.start_time|date:"d.m.Y H:i" }}</dd>
+
+                <dt class="col-sm-3">Окончание рассылки:</dt>
+                <dd class="col-sm-9">{{ object.end_time|date:"d.m.Y H:i" }}</dd>
+
+                <dt class="col-sm-3">Сообщение:</dt>
+                <dd class="col-sm-9">
+                    <strong>{{ object.message.subject }}</strong>
+                    <p class="mt-2">{{ object.message.body }}</p>
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            Получатели ({{ object.clients.count }})
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                {% for client in object.clients.all %}
+                <li class="list-group-item">
+                    {{ client.full_name }} - {{ client.email }}
+                    {% if client.comment %}<small class="text-muted">({{ client.comment }})</small>{% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            Попытки отправки ({{ object.mailingattempt_set.count }})
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Дата и время</th>
+                        <th>Статус</th>
+                        <th>Ответ сервера</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for attempt in object.mailingattempt_set.all %}
+                    <tr class="{% if attempt.status == 'success' %}table-success{% else %}table-danger{% endif %}">
+                        <td>{{ attempt.attempt_time|date:"d.m.Y H:i" }}</td>
+                        <td>{{ attempt.get_status_display }}</td>
+                        <td>{{ attempt.server_response|default:"-" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3" class="text-center">Нет данных</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="btn-group">
+        {% if object.owner == request.user %}
+            <a href="{% url 'mailing-update' object.pk %}" class="btn btn-primary">
+                <i class="bi bi-pencil"></i> Редактировать
+            </a>
+            <a href="{% url 'mailing-delete' object.pk %}" class="btn btn-danger">
+                <i class="bi bi-trash"></i> Удалить
+            </a>
+            {% if object.status == 'started' %}
+            <form method="post" action="{% url 'mailing-start' object.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-send"></i> Запустить сейчас
+                </button>
+            </form>
+            {% endif %}
+        {% endif %}
+        <a href="{% url 'mailing_list' %}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Назад к списку
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+
+<form method="post" action="{% url 'mailing-start' object.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">Запустить рассылку</button>
+</form>

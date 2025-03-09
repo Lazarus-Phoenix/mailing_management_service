@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Попытки рассылок</h1>
+<table>
+    <tr>
+        <th>Рассылка</th>
+        <th>Время попытки</th>
+        <th>Статус</th>
+        <th>Ответ сервера</th>
+    </tr>
+    {% for attempt in object_list %}
+    <tr>
+        <td>{{ attempt.mailing }}</td>
+        <td>{{ attempt.attempt_time }}</td>
+        <td>{{ attempt.get_status_display }}</td>
+        <td>{{ attempt.server_response }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

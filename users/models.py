@@ -1,12 +1,15 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
+
 
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
-    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
-    phone = PhoneNumberField(blank=True, null=True, region='RU')  # Указываем регион (например, 'RU' для России)
+    avatar = models.ImageField(upload_to="avatars/", blank=True, null=True)
+    phone = models.CharField(max_length=15, blank=True, null=True)
     country = models.CharField(max_length=100, blank=True, null=True)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username"]
+
+    def __str__(self):
+        return self.username

@@ -5,33 +5,45 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'mailing_list' %}">Рассылки</a>
+            {% if user.is_authenticated %}
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'mailing_list' %}">Рассылки</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'client_list' %}">Клиенты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'message_list' %}">Сообщения</a>
+                    </li>
+                </ul>
+            {% endif %}
+            <ul>
+                <li class ="list-unstyled">
+                    {% if user.is_authenticated %}
+                        <p>Добро пожаловать {{user.name}} {{user.email}} !</p>
+                        <a href="{% url 'profile' %}" class="btn btn-outline-primary">Профиль</a>
+                    {% else %}
+                        <p>Добро пожаловать на наш сайт!</p>
+                    {% endif %}
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'client_list' %}">Клиенты</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'message_list' %}">Сообщения</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav">
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <span class="navbar-text me-3">Привет, {{ user.email }}!</span>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Войти</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">Зарегистрироваться</a>
-                </li>
-                {% endif %}
+
+              {% if user.is_authenticated %}
+                  <li class="nav-item">
+                      <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-link nav-link">Выйти
+                          </button>
+                      </form>
+                  </li>
+              {% else %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'login' %}">Войти</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
+                  </li>
+              {% endif %}
             </ul>
         </div>
     </div>

@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card text-white bg-info mb-3">
+            <div class="card text-white bg-secondary mb-3">
                 <div class="card-header">Уникальные клиенты</div>
                 <div class="card-body">
                     <h5 class="card-title">{{ unique_clients }}</h5>
@@ -31,11 +31,12 @@
             </div>
         </div>
     </div>
-
-    <div class="mt-4">
-        <a href="{% url 'mailing_list' %}" class="btn btn-outline-primary">Управление рассылками</a>
-        <a href="{% url 'client_list' %}" class="btn btn-outline-secondary">Управление клиентами</a>
-        <a href="{% url 'message_list' %}" class="btn btn-outline-success">Управление сообщениями</a>
+        {% if user.is_authenticated %}
+            <div class="mt-4">
+                <a href="{% url 'mailing_list' %}" class="btn btn-outline-primary">Управление рассылками</a>
+                <a href="{% url 'client_list' %}" class="btn btn-outline-secondary">Управление клиентами</a>
+                <a href="{% url 'message_list' %}" class="btn btn-outline-success">Управление сообщениями</a>
+            </div>
+        {% endif %}
     </div>
-</div>
 {% endblock %}

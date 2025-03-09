@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Рассылки</h2>
+    <a href="{% url 'mailing_create' %}" class="btn btn-primary mb-3">Создать рассылку</a>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Сообщение</th>
+                <th>Статус</th>
+                <th>Начало</th>
+                <th>Окончание</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mailing in object_list %}
+
+                <tr>
+                    <td>{{ mailing.message.subject }}</td>
+                    <td>{{ mailing.get_status_display }}</td>
+                    <td>{{ mailing.start_time }}</td>
+                    <td>{{ mailing.end_time }}</td>
+                    <td>
+                        {% if mailing.owner == request.user %}
+                            <a href="{% url 'mailing-detail' mailing.pk %}" class="btn btn-sm btn-outline-warning">📨</a>
+                            <a href="{% url 'mailing-update' mailing.pk %}" class="btn btn-sm btn-outline-warning">✏️</a>
+                            <a href="{% url 'mailing-delete' mailing.pk %}" class="btn btn-sm btn-outline-danger">❌</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

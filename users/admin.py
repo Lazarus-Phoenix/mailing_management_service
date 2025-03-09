@@ -1,6 +1,6 @@
-from django.contrib import admin
-from .models import CustomUser
+from django.contrib.auth.mixins import UserPassesTestMixin
 
-@admin.register(CustomUser)
-class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ('email', 'phone', 'country')
+
+class ManagerRequiredMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.groups.filter(name="Менеджеры").exists()

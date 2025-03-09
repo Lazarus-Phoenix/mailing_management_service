@@ -1,9 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Профиль</h1>
-<p>Имя: {{ user.first_name }}</p>
-<p>Фамилия: {{ user.last_name }}</p>
-<p>Email: {{ user.email }}</p>
-<a href="{% url 'edit_profile' %}" class="btn btn-primary">Редактировать</a>
+<div class="container mt-5">
+    <h2>Профиль пользователя</h2>
+    <dl class="row">
+        <dt class="col-sm-3">Имя пользователя:</dt>
+        <dd class="col-sm-9">{{ user_profile.username }}</dd>
+
+        <dt class="col-sm-3">Email:</dt>
+        <dd class="col-sm-9">{{ user_profile.email }}</dd>
+
+        <dt class="col-sm-3">Телефон:</dt>
+        <dd class="col-sm-9">{{ user_profile.phone|default:"Не указан" }}</dd>
+
+        <dt class="col-sm-3">Страна:</dt>
+        <dd class="col-sm-9">{{ user_profile.country|default:"Не указана" }}</dd>
+
+        <dt class="col-sm-3">Аватар:</dt>
+        <dd class="col-sm-9">
+            {% if user_profile.avatar %}
+                <img src="{{ user_profile.avatar.url }}" alt="Аватар" class="img-thumbnail" width="150">
+            {% else %}
+                Аватар не загружен
+            {% endif %}
+        </dd>
+    </dl>
+    <a href="{% url 'profile-edit' %}" class="btn btn-primary">Редактировать профиль</a>
+</div>
 {% endblock %}

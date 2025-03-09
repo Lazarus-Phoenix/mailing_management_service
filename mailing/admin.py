@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import Mailing
 
-# Register your models here.
+
+@admin.register(Mailing)
+class MailingAdmin(admin.ModelAdmin):
+    list_display = ("id", "status", "start_time")
+    list_filter = ("status",)

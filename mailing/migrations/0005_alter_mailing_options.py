@@ -6,12 +6,17 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mailing', '0004_remove_mailingattempt_client_and_more'),
+        ("mailing", "0004_remove_mailingattempt_client_and_more"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='mailing',
-            options={'permissions': [('can_view_all', 'Может просматривать все рассылки'), ('can_disable', 'Может отключать рассылки')]},
+            name="mailing",
+            options={
+                "permissions": [
+                    ("can_view_all", "Может просматривать все рассылки"),
+                    ("can_disable", "Может отключать рассылки"),
+                ]
+            },
         ),
     ]

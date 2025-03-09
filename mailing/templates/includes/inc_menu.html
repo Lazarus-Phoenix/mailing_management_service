@@ -22,6 +22,7 @@
                 <li class ="list-unstyled">
                     {% if user.is_authenticated %}
                         <p>Добро пожаловать {{user.name}} {{user.email}} !</p>
+                        <a href="{% url 'profile' %}" class="btn btn-outline-primary">Профиль</a>
                     {% else %}
                         <p>Добро пожаловать на наш сайт!</p>
                     {% endif %}

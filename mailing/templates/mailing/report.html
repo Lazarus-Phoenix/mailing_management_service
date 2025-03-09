@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Отчеты по рассылкам</h1>
+<table>
+    <tr>
+        <th>Рассылка</th>
+        <th>Успешные</th>
+        <th>Неуспешные</th>
+        <th>Всего</th>
+    </tr>
+    {% for report in reports %}
+    <tr>
+        <td>{{ report.mailing }}</td>
+        <td>{{ report.success }}</td>
+        <td>{{ report.failed }}</td>
+        <td>{{ report.total }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

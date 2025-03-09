@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Удаление рассылки</h2>
+    <p>Вы уверены, что хотите удалить рассылку <strong>#{{ object.id }}</strong>?</p>
+    <p>Детали рассылки:</p>
+    <ul>
+        <li><strong>Статус:</strong> {{ object.get_status_display }}</li>
+        <li><strong>Начало:</strong> {{ object.start_time|date:"d.m.Y H:i" }}</li>
+        <li><strong>Окончание:</strong> {{ object.end_time|date:"d.m.Y H:i" }}</li>
+        <li><strong>Сообщение:</strong> {{ object.message.subject }}</li>
+        <li><strong>Получатели:</strong> {{ object.clients.count }}</li>
+    </ul>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">
+            <i class="bi bi-trash"></i> Удалить
+        </button>
+        <a href="{% url 'mailing-detail' object.pk %}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Отмена
+        </a>
+    </form>
+</div>
+{% endblock %}

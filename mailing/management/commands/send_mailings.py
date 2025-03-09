@@ -5,6 +5,7 @@ from ...models import Mailing, MailingAttempt
 from ...services import send_mailing
 from django.core.mail import send_mail
 
+
 def send_mailing(mailing):
     for client in mailing.clients.all():
         try:
@@ -16,30 +17,26 @@ def send_mailing(mailing):
                 fail_silently=False,
             )
             MailingAttempt.objects.create(
-                status='success',
+                status="success",
                 mailing=mailing,
-                server_response='Сообщение успешно отправлено',
+                server_response="Сообщение успешно отправлено",
             )
         except Exception as e:
             MailingAttempt.objects.create(
-                status='failed',
+                status="failed",
                 mailing=mailing,
-            server_response=str(e),
-
+                server_response=str(e),
             )
 
 
 class Command(BaseCommand):
-    help = 'Send scheduled mailings'
+    help = "Send scheduled mailings"
 
     def handle(self, *args, **options):
-        mailings = Mailing.objects.filter(
-
-            status='started'
-        )
+        mailings = Mailing.objects.filter(status="started")
         for mailing in mailings:
             send_mailing(mailing)
-            mailing.status = 'started'
+            mailing.status = "started"
             mailing.save()
 
 

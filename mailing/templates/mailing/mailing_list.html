@@ -17,16 +17,20 @@
         </thead>
         <tbody>
             {% for mailing in object_list %}
-            <tr>
-                <td>{{ mailing.message.subject }}</td>
-                <td>{{ mailing.get_status_display }}</td>
-                <td>{{ mailing.start_time }}</td>
-                <td>{{ mailing.end_time }}</td>
-                <td>
-                    <a href="{% url 'mailing_update' mailing.pk %}" class="btn btn-sm btn-outline-warning">✏️</a>
-                    <a href="{% url 'mailing_delete' mailing.pk %}" class="btn btn-sm btn-outline-danger">❌</a>
-                </td>
-            </tr>
+
+                <tr>
+                    <td>{{ mailing.message.subject }}</td>
+                    <td>{{ mailing.get_status_display }}</td>
+                    <td>{{ mailing.start_time }}</td>
+                    <td>{{ mailing.end_time }}</td>
+                    <td>
+                        {% if mailing.owner == request.user %}
+                            <a href="{% url 'mailing-detail' mailing.pk %}" class="btn btn-sm btn-outline-warning">📨</a>
+                            <a href="{% url 'mailing-update' mailing.pk %}" class="btn btn-sm btn-outline-warning">✏️</a>
+                            <a href="{% url 'mailing-delete' mailing.pk %}" class="btn btn-sm btn-outline-danger">❌</a>
+                        {% endif %}
+                    </td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>

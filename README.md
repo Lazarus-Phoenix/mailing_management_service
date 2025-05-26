@@ -281,7 +281,7 @@ mailing_management_service/
     
 - **GitHub**: [Lazarus-Phoenix](https://github.com/Lazarus-Phoenix)
     
-- **Контакт**: [Я везде, прошепчи и я услышу.]
+- **Контакт**: [Я везде!- прошепчи и я услышу.]
     
 
 ---
